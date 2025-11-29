@@ -75,16 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Add parallax effect to hero section
-  let heroSection = document.querySelector(".hero-section");
-  if (heroSection) {
-    window.addEventListener("scroll", () => {
-      const scrolled = window.pageYOffset;
-      if (scrolled < window.innerHeight) {
-        heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
-      }
-    });
-  }
+  // Parallax effect removed to prevent content overlap
 
   // Animated counter for stats
   function animateCounter(element) {

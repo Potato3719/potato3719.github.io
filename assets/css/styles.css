@@ -21,6 +21,7 @@ body {
   background: linear-gradient(135deg, #1d3557 0%, #457b9d 50%, #1d3557 100%);
   overflow: hidden;
   padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 .hero-section .overlay {
@@ -313,6 +314,12 @@ body {
 /* Scroll Animations */
 section {
   position: relative;
+  z-index: 1;
+}
+
+main {
+  position: relative;
+  z-index: 1;
 }
 
 /* Smooth scrolling */
