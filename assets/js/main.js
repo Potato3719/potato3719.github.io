@@ -89,6 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Animated counter for stats
   function animateCounter(element) {
     const target = parseInt(element.getAttribute("data-target"));
+    if (isNaN(target)) return;
+
     const duration = 2000;
     const step = target / (duration / 16);
     let current = 0;
@@ -120,11 +122,27 @@ document.addEventListener("DOMContentLoaded", function () {
         statsObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.1, rootMargin: "0px" });
 
   const statsSection = document.querySelector(".hero-stats");
   if (statsSection) {
-    statsObserver.observe(statsSection);
+    // Check if stats section is already visible on load
+    const rect = statsSection.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+
+    if (isVisible) {
+      // Trigger animation immediately if already visible
+      const counters = statsSection.querySelectorAll(".stat-number");
+      counters.forEach((counter) => {
+        if (!counter.classList.contains("counted")) {
+          counter.classList.add("counted");
+          animateCounter(counter);
+        }
+      });
+    } else {
+      // Otherwise observe for when it comes into view
+      statsObserver.observe(statsSection);
+    }
   }
 });
 
